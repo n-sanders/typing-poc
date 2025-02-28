@@ -17,14 +17,9 @@ let startTime;
 let timerInterval;
 let totalScore = 0;
 
-// Load prompts from JSON
-fetch('prompts.json')
-  .then((response) => response.json())
-  .then((data) => {
-    prompts = data.prompts;
-    loadPrompt();
-  })
-  .catch((error) => console.error('Error loading prompts:', error));
+// Load prompts directly from prompts.js
+prompts = promptsData.prompts;
+loadPrompt();
 
 // Load the next prompt sequentially
 function loadPrompt() {
