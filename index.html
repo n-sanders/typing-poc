@@ -9,15 +9,11 @@
   <body>
     <div class="container">
       <h1>Typing Practice</h1>
-      <div class="theme-controls">
-        <span>Theme: </span>
-        <button id="theme-light" class="theme-button" title="Light Theme"></button>
-        <button id="theme-dark" class="theme-button" title="Dark Theme"></button>
-        <button id="theme-nature" class="theme-button" title="Nature Theme"></button>
-        <button id="theme-sunset" class="theme-button" title="Sunset Theme"></button>
-        <button id="theme-bubble-gum" class="theme-button" title="Bubble Gum Theme"></button>
-        <button id="theme-purple-rain" class="theme-button" title="Purple Rain Theme"></button>
-        <button id="theme-darth-vader" class="theme-button" title="Darth Vader Theme"></button>
+      <div class="prompt-category-selector">
+        <label for="prompt-category">Prompt Category:</label>
+        <select id="prompt-category">
+          <!-- Options will be populated via JavaScript -->
+        </select>
       </div>
       <div id="prompt" class="prompt"></div>
       <div>
@@ -37,6 +33,16 @@
           Score: <span id="score">0</span> (Total:
           <span id="total-score">0</span>)
         </p>
+      </div>
+      <div class="theme-controls">
+        <span>Theme: </span>
+        <button id="theme-light" class="theme-button" title="Light Theme"></button>
+        <button id="theme-dark" class="theme-button" title="Dark Theme"></button>
+        <button id="theme-nature" class="theme-button" title="Nature Theme"></button>
+        <button id="theme-sunset" class="theme-button" title="Sunset Theme"></button>
+        <button id="theme-bubble-gum" class="theme-button" title="Bubble Gum Theme"></button>
+        <button id="theme-purple-rain" class="theme-button" title="Purple Rain Theme"></button>
+        <button id="theme-darth-vader" class="theme-button" title="Darth Vader Theme"></button>
       </div>
     </div>
     <script src="prompts.js"></script>

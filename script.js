@@ -8,6 +8,7 @@ const accuracyEl = document.getElementById('accuracy');
 const timerEl = document.getElementById('timer');
 const scoreEl = document.getElementById('score');
 const totalScoreEl = document.getElementById('total-score');
+const promptCategorySelect = document.getElementById('prompt-category');
 
 // Theme elements
 const themeLightBtn = document.getElementById('theme-light');
@@ -26,10 +27,47 @@ let startTime;
 let timerInterval;
 let totalScore = 0;
 let currentTheme = 'light'; // Default theme
+let currentCategory = 'cat-prompts'; // Default category
 
-// Load prompts directly from prompts.js
-prompts = promptsData.prompts;
-loadPrompt();
+// Initialize prompt categories
+function initPromptCategories() {
+  // Clear existing options
+  promptCategorySelect.innerHTML = '';
+  
+  // Add options for each category
+  promptsData.categories.forEach(category => {
+    const option = document.createElement('option');
+    option.value = category.id;
+    option.textContent = category.name;
+    promptCategorySelect.appendChild(option);
+  });
+  
+  // Set the default selected category
+  promptCategorySelect.value = currentCategory;
+  
+  // Add event listener for category change
+  promptCategorySelect.addEventListener('change', handleCategoryChange);
+  
+  // Load prompts from the default category
+  loadPromptsFromCurrentCategory();
+}
+
+// Handle category change
+function handleCategoryChange() {
+  currentCategory = promptCategorySelect.value;
+  currentPromptIndex = 0; // Reset to the first prompt in the new category
+  loadPromptsFromCurrentCategory();
+  localStorage.setItem('typingPracticeCategory', currentCategory);
+}
+
+// Load prompts from the selected category
+function loadPromptsFromCurrentCategory() {
+  const category = promptsData.categories.find(cat => cat.id === currentCategory);
+  if (category) {
+    prompts = category.prompts;
+    loadPrompt();
+  }
+}
 
 // Load the next prompt sequentially
 function loadPrompt() {
@@ -183,5 +221,16 @@ function loadSavedTheme() {
   }
 }
 
-// Initialize theme
+// Load saved category from localStorage
+function loadSavedCategory() {
+  const savedCategory = localStorage.getItem('typingPracticeCategory');
+  if (savedCategory) {
+    currentCategory = savedCategory;
+    promptCategorySelect.value = currentCategory;
+    loadPromptsFromCurrentCategory();
+  }
+}
+
+initPromptCategories();
 loadSavedTheme();
+loadSavedCategory();

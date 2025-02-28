@@ -120,6 +120,11 @@ body {
   min-height: 50px;
 }
 
+.prompt-category-selector {
+  margin: 15px 0;
+  padding: 10px;
+}
+
 textarea {
   width: 100%;
   max-width: 700px;
