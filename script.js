@@ -9,6 +9,15 @@ const timerEl = document.getElementById('timer');
 const scoreEl = document.getElementById('score');
 const totalScoreEl = document.getElementById('total-score');
 
+// Theme elements
+const themeLightBtn = document.getElementById('theme-light');
+const themeDarkBtn = document.getElementById('theme-dark');
+const themeNatureBtn = document.getElementById('theme-nature');
+const themeSunsetBtn = document.getElementById('theme-sunset');
+const themeBubbleGumBtn = document.getElementById('theme-bubble-gum');
+const themePurpleRainBtn = document.getElementById('theme-purple-rain');
+const themeDarthVaderBtn = document.getElementById('theme-darth-vader');
+
 // State
 let prompts = [];
 let currentPrompt = '';
@@ -16,6 +25,7 @@ let currentPromptIndex = 0;
 let startTime;
 let timerInterval;
 let totalScore = 0;
+let currentTheme = 'light'; // Default theme
 
 // Load prompts directly from prompts.js
 prompts = promptsData.prompts;
@@ -119,3 +129,59 @@ function resetStats() {
   timerEl.textContent = '0s';
   scoreEl.textContent = '0';
 }
+
+// Theme controls
+themeLightBtn.addEventListener('click', () => setTheme('light'));
+themeDarkBtn.addEventListener('click', () => setTheme('dark'));
+themeNatureBtn.addEventListener('click', () => setTheme('nature'));
+themeSunsetBtn.addEventListener('click', () => setTheme('sunset')); 
+themeBubbleGumBtn.addEventListener('click', () => setTheme('bubble-gum'));
+themePurpleRainBtn.addEventListener('click', () => setTheme('purple-rain'));
+themeDarthVaderBtn.addEventListener('click', () => setTheme('darth-vader'));
+
+function setTheme(theme) {
+  // Remove all theme classes
+  document.body.classList.remove('theme-light', 'theme-dark', 'theme-nature', 'theme-sunset', 'theme-bubble-gum', 'theme-purple-rain', 'theme-darth-vader');
+  
+  // Add the selected theme class (if not light theme)
+  if (theme !== 'light') {
+    document.body.classList.add(`theme-${theme}`);
+  }
+  
+  // Update current theme and save preference
+  currentTheme = theme;
+  localStorage.setItem('typingPracticeTheme', theme);
+  
+  // Update active button indicator
+  updateActiveThemeButton();
+}
+
+function updateActiveThemeButton() {
+  // Remove active status from all buttons
+  themeLightBtn.style.border = '2px solid var(--border-color)';
+  themeDarkBtn.style.border = '2px solid var(--border-color)';
+  themeNatureBtn.style.border = '2px solid var(--border-color)';
+  themeSunsetBtn.style.border = '2px solid var(--border-color)';
+  themeBubbleGumBtn.style.border = '2px solid var(--border-color)';
+  themePurpleRainBtn.style.border = '2px solid var(--border-color)';
+  themeDarthVaderBtn.style.border = '2px solid var(--border-color)';
+  
+  // Set active status on current theme button
+  const activeButton = document.getElementById(`theme-${currentTheme}`);
+  if (activeButton) {
+    activeButton.style.border = '2px solid #ff0000';
+  }
+}
+
+// Load saved theme from localStorage
+function loadSavedTheme() {
+  const savedTheme = localStorage.getItem('typingPracticeTheme');
+  if (savedTheme) {
+    setTheme(savedTheme);
+  } else {
+    updateActiveThemeButton(); // Set default active button
+  }
+}
+
+// Initialize theme
+loadSavedTheme();

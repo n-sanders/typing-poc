@@ -1,3 +1,94 @@
+:root {
+  /* Default theme (light) */
+  --bg-color: #f0f0f0;
+  --container-bg: white;
+  --container-shadow: rgba(0, 0, 0, 0.1);
+  --prompt-bg: #e0e0e0;
+  --text-color: #333;
+  --button-bg: #007bff;
+  --button-hover: #0056b3;
+  --button-text: white;
+  --border-color: #ccc;
+}
+
+/* Dark theme */
+.theme-dark {
+  --bg-color: #2a2a2a;
+  --container-bg: #3a3a3a;
+  --container-shadow: rgba(0, 0, 0, 0.3);
+  --prompt-bg: #4a4a4a;
+  --text-color: #e0e0e0;
+  --button-bg: #2980b9;
+  --button-hover: #3498db;
+  --button-text: white;
+  --border-color: #555;
+}
+
+/* Nature theme */
+.theme-nature {
+  --bg-color: #e8f5e9;
+  --container-bg: #f1f8e9;
+  --container-shadow: rgba(0, 0, 0, 0.1);
+  --prompt-bg: #c8e6c9;
+  --text-color: #33691e;
+  --button-bg: #66bb6a;
+  --button-hover: #4caf50;
+  --button-text: white;
+  --border-color: #a5d6a7;
+}
+
+/* Sunset theme */
+.theme-sunset {
+  --bg-color: #fff3e0;
+  --container-bg: #fff8e1;
+  --container-shadow: rgba(0, 0, 0, 0.1);
+  --prompt-bg: #ffe0b2;
+  --text-color: #bf360c;
+  --button-bg: #ff9800;
+  --button-hover: #f57c00;
+  --button-text: white;
+  --border-color: #ffcc80;
+}
+
+/* Bubble Gum theme - Shades of pink */
+.theme-bubble-gum {
+  --bg-color: #fce4ec;         /* Light pink background */
+  --container-bg: #f8bbd0;     /* Slightly deeper pink for containers */
+  --container-shadow: rgba(0, 0, 0, 0.1); /* Subtle shadow, unchanged */
+  --prompt-bg: #f48fb1;        /* Medium pink for prompts */
+  --text-color: #ad1457;       /* Darker pinkish-red for readable text */
+  --button-bg: #ec407a;        /* Vibrant pink for buttons */
+  --button-hover: #d81b60;     /* Darker pink on hover */
+  --button-text: white;        /* White text for contrast */
+  --border-color: #f06292;     /* Mid-tone pink for borders */
+}
+
+/* Purple Rain theme - Purple primary with accents */
+.theme-purple-rain {
+  --bg-color: #ede7f6;         /* Very light purple background */
+  --container-bg: #d1c4e9;     /* Soft lavender for containers */
+  --container-shadow: rgba(0, 0, 0, 0.1); /* Subtle shadow, unchanged */
+  --prompt-bg: #b39ddb;        /* Muted purple for prompts */
+  --text-color: #4a148c;       /* Deep purple for text */
+  --button-bg: #7e57c2;        /* Bright purple for buttons */
+  --button-hover: #5e35b1;     /* Darker purple on hover */
+  --button-text: white;        /* White text for contrast */
+  --border-color: #9575cd;     /* Medium purple for borders */
+}
+
+/* Darth Vader theme - Red and black */
+.theme-darth-vader {
+  --bg-color: #212121;         /* Dark gray-black background */
+  --container-bg: #424242;     /* Slightly lighter black for containers */
+  --container-shadow: rgba(0, 0, 0, 0.3); /* Darker shadow for depth */
+  --prompt-bg: #b71c1c;        /* Deep red for prompts (lightsaber vibe) */
+  --text-color: #ef5350;       /* Bright red for readable text */
+  --button-bg: #d32f2f;        /* Strong red for buttons */
+  --button-hover: #b71c1c;     /* Darker red on hover */
+  --button-text: white;        /* White text for contrast */
+  --border-color: #ef5350;     /* Bright red for borders */
+}
+
 body {
   font-family: Arial, sans-serif;
   display: flex;
@@ -5,34 +96,40 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: #f0f0f0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
 }
 
 .container {
   text-align: center;
-  background: white;
+  background: var(--container-bg);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px var(--container-shadow);
+  width: 80%;
+  max-width: 800px;
 }
 
 .prompt {
-  font-size: 1.2em;
+  font-size: 32px; /* Set prompt text size to 32px */
   margin-bottom: 20px;
   padding: 10px;
-  background: #e0e0e0;
+  background: var(--prompt-bg);
   border-radius: 5px;
   min-height: 50px;
 }
 
 textarea {
   width: 100%;
-  max-width: 500px;
+  max-width: 700px;
   padding: 10px;
   font-size: 1em;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   resize: none;
+  background-color: var(--container-bg);
+  color: var(--text-color);
 }
 
 button {
@@ -40,17 +137,60 @@ button {
   padding: 10px 20px;
   font-size: 1em;
   cursor: pointer;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--button-bg);
+  color: var(--button-text);
   border: none;
   border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: var(--button-hover);
 }
 
 #stats {
   margin-top: 20px;
   font-size: 1.1em;
+}
+
+.font-controls, .theme-controls {
+  margin: 10px 0;
+}
+
+.theme-button {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin: 0 5px;
+  padding: 0;
+  cursor: pointer;
+  border: 2px solid var(--border-color);
+}
+
+#theme-light {
+  background: linear-gradient(to bottom right, #f0f0f0, white);
+}
+
+#theme-dark {
+  background: linear-gradient(to bottom right, #2a2a2a, #3a3a3a);
+}
+
+#theme-nature {
+  background: linear-gradient(to bottom right, #e8f5e9, #66bb6a);
+}
+
+#theme-sunset {
+  background: linear-gradient(to bottom right, #fff3e0, #ff9800);
+}
+
+#theme-bubble-gum {
+  background: linear-gradient(to bottom right, #fce4ec, #f48fb1);
+}
+
+#theme-purple-rain {
+  background: linear-gradient(to bottom right, #e8eaf6, #4a148c);
+}
+
+#theme-darth-vader {
+  background: linear-gradient(to bottom right, #353535, #3f3f3f);
 }

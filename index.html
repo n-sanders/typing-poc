@@ -9,12 +9,24 @@
   <body>
     <div class="container">
       <h1>Typing Practice</h1>
+      <div class="theme-controls">
+        <span>Theme: </span>
+        <button id="theme-light" class="theme-button" title="Light Theme"></button>
+        <button id="theme-dark" class="theme-button" title="Dark Theme"></button>
+        <button id="theme-nature" class="theme-button" title="Nature Theme"></button>
+        <button id="theme-sunset" class="theme-button" title="Sunset Theme"></button>
+        <button id="theme-bubble-gum" class="theme-button" title="Bubble Gum Theme"></button>
+        <button id="theme-purple-rain" class="theme-button" title="Purple Rain Theme"></button>
+        <button id="theme-darth-vader" class="theme-button" title="Darth Vader Theme"></button>
+      </div>
       <div id="prompt" class="prompt"></div>
-      <textarea
-        id="input"
-        rows="4"
-        placeholder="Start typing here..."
-      ></textarea>
+      <div>
+        <textarea
+          id="input"
+          rows="4"
+          placeholder="Press start, and then begin typing here. When your typing matches, you will automatically see the next sentence."
+        ></textarea>
+      </div>
       <button id="start-btn">Start</button>
       <button id="reset-btn">Reset</button>
       <div id="stats">
