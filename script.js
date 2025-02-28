@@ -55,7 +55,6 @@ function initPromptCategories() {
 // Handle category change
 function handleCategoryChange() {
   currentCategory = promptCategorySelect.value;
-  currentPromptIndex = 0; // Reset to the first prompt in the new category
   loadPromptsFromCurrentCategory();
   localStorage.setItem('typingPracticeCategory', currentCategory);
 }
@@ -65,11 +64,26 @@ function loadPromptsFromCurrentCategory() {
   const category = promptsData.categories.find(cat => cat.id === currentCategory);
   if (category) {
     prompts = category.prompts;
+    // Select a random prompt to start
+    currentPromptIndex = Math.floor(Math.random() * prompts.length);
     loadPrompt();
   }
 }
 
-// Load the next prompt sequentially
+// Get a random prompt that's different from the current one
+function getRandomPromptIndex() {
+  if (prompts.length <= 1) return 0;
+  
+  // If there's more than one prompt, make sure we don't get the same one
+  let newIndex;
+  do {
+    newIndex = Math.floor(Math.random() * prompts.length);
+  } while (newIndex === currentPromptIndex && prompts.length > 1);
+  
+  return newIndex;
+}
+
+// Load a prompt (randomly)
 function loadPrompt() {
   if (prompts.length === 0) return;
   currentPrompt = prompts[currentPromptIndex];
@@ -155,8 +169,8 @@ function endTest(lastScore) {
   inputEl.removeEventListener('input', updateStats);
   startTime = null;
 
-  // Move to next prompt
-  currentPromptIndex = (currentPromptIndex + 1) % prompts.length; // Loop back to start
+  // Move to next prompt randomly
+  currentPromptIndex = getRandomPromptIndex();
   loadPrompt();
 }
 
@@ -227,7 +241,7 @@ function loadSavedCategory() {
   if (savedCategory) {
     currentCategory = savedCategory;
     promptCategorySelect.value = currentCategory;
-    loadPromptsFromCurrentCategory();
+    loadPromptsFromCurrentCategory(); // This now selects a random prompt
   }
 }
 
